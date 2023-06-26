@@ -5,13 +5,17 @@ import * as THREE from "three";
 import { CustomUniforms, GLTFCyberTruck } from "./types";
 import disksVertex from "./shaders/cyber/disk.vertex.glsl";
 import disksFragment from "./shaders/cyber/disk.fragment.glsl";
-import {
-	Object3DNode,
-	ShaderMaterialProps,
-	extend,
-	useFrame,
-} from "@react-three/fiber";
+import stripesFragment from "./shaders/cyber/stripes.fragment.glsl";
+import stripesVertex from "./shaders/cyber/stripes.vertex.glsl";
+import { extend, useFrame } from "@react-three/fiber";
 import { useControls } from "leva";
+import {
+	DisksShaderMaterial,
+	StripesShaderMaterial,
+} from "./shaders/shaderMaterialTS/materials";
+
+extend({ DisksShaderMaterial });
+extend({ StripesShaderMaterial });
 
 const URL_MODEL = "/models/cybertruck.gltf";
 export function Cybertruck(props: JSX.IntrinsicElements["group"]) {
@@ -122,12 +126,11 @@ export function Cybertruck(props: JSX.IntrinsicElements["group"]) {
 				material={materials.black}
 				castShadow
 			/>
-			{/* BODY MESH -> SHADER */}
 			<mesh geometry={nodes.interior001_6.geometry}>
 				{shader === "disks" && (
-					<shaderMaterial
+					<disksShaderMaterial
+						//@ts-ignore
 						ref={diskRef}
-						args={[diskUniforms]}
 						//@ts-ignore
 						uAlpha={disksControls.alpha}
 						uMultiplier={disksControls.multiplier}
@@ -138,15 +141,18 @@ export function Cybertruck(props: JSX.IntrinsicElements["group"]) {
 					/>
 				)}
 				{shader === "stripes" && (
-					<shaderMaterial
+					<stripesShaderMaterial
+						//@ts-ignore
 						ref={stripesRef}
-						args={[stripesUniforms]}
+						// args={[stripesUniforms]}
 						transparent
 						//@ts-ignore
 						uAlpha={stripesControls.alpha}
 						uMultiplier={stripesControls.multiplier}
 						uColorA={stripesControls.colorA}
 						uColorB={stripesControls.colorB}
+						vertexShader={stripesVertex}
+						fragmentShader={stripesFragment}
 					/>
 				)}
 			</mesh>
