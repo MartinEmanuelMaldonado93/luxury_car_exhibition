@@ -8,11 +8,15 @@ import { Loader } from "@react-three/drei";
 export default function CanvasScene() {
 	return (
 		// a wrapper is needed bc canvas takes the size of the parent
-		<div style={{ height: "100vh" }}>
-			<Canvas shadows camera={{ position: [0, 3, 9], fov: 42 }}>
+		<div  >
+			<Canvas
+				style={{ height: "100vh" }}
+				shadows
+				camera={{ position: [0, 3, 9], fov: 42 }}
+			>
 				<color attach="background" args={["#15151a"]} />
 				<ShowCase />
-				{/* <Effects /> */}
+				<Effects />
 			</Canvas>
 			<Loader />
 		</div>

@@ -2,17 +2,17 @@
 import { shaderMaterial, useGLTF } from "@react-three/drei";
 import React, { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { CustomUniforms, GLTFCyberTruck } from "./types";
-import disksVertex from "./shaders/cyber/disk.vertex.glsl";
-import disksFragment from "./shaders/cyber/disk.fragment.glsl";
-import stripesFragment from "./shaders/cyber/stripes.fragment.glsl";
-import stripesVertex from "./shaders/cyber/stripes.vertex.glsl";
+import { CustomUniforms, GLTFCyberTruck } from "../types";
+import disksVertex from "../shaders/cyber/disk.vertex.glsl";
+import disksFragment from "../shaders/cyber/disk.fragment.glsl";
+import stripesFragment from "../shaders/cyber/stripes.fragment.glsl";
+import stripesVertex from "../shaders/cyber/stripes.vertex.glsl";
 import { extend, useFrame } from "@react-three/fiber";
 import { useControls } from "leva";
 import {
 	DisksShaderMaterial,
 	StripesShaderMaterial,
-} from "./shaders/shaderMaterialTS/materials";
+} from "../shaders/shaderMaterialTS/materials";
 
 extend({ DisksShaderMaterial });
 extend({ StripesShaderMaterial });
@@ -131,6 +131,7 @@ export function Cybertruck(props: JSX.IntrinsicElements["group"]) {
 					<disksShaderMaterial
 						//@ts-ignore
 						ref={diskRef}
+						transparent
 						//@ts-ignore
 						uAlpha={disksControls.alpha}
 						uMultiplier={disksControls.multiplier}
