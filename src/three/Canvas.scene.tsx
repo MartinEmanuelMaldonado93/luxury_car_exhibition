@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import Effects from "./Effects.post_processing";
 import { ShowCase } from "./ShowCase";
-import { Loader } from "@react-three/drei";
+import { Loader, Stats } from "@react-three/drei";
 
 export default function CanvasScene() {
 	return (
@@ -17,6 +17,7 @@ export default function CanvasScene() {
 				<color attach="background" args={["#15151a"]} />
 				<ShowCase />
 				<Effects />
+				<Stats />
 			</Canvas>
 			<Loader />
 		</div>

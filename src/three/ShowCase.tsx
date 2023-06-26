@@ -9,10 +9,12 @@ import {
 
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
-import { useLayoutEffect, useRef } from "react";
+import { use, useLayoutEffect, useRef } from "react";
 import * as THREE from "three";
 import { Cybertruck } from "./models/CyberTruck.model";
 import { Ground } from "./components/Ground";
+import { CorvetteCar } from "./models/Corvette";
+import { useControls } from "leva";
 
 const shiningWhite = new THREE.Color(1.1, 1.1, 1.1);
 const shiningRed = new THREE.Color(4.8, 0.1, 0.1);
@@ -80,12 +82,24 @@ export function ShowCase() {
 			1.8
 		);
 	}, []);
-
+	const orbitCtrls = useControls({
+		rotate: { value: false },
+		rotateVelocity: {
+			value: 1.5,
+			max: 3,
+			min: 0.2,
+		},
+	});
+	 
 	return (
 		<>
-			<OrbitControls minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
+			<OrbitControls
+				autoRotate={orbitCtrls.rotate}
+				autoRotateSpeed={orbitCtrls.rotateVelocity}
+				minPolarAngle={0}
+				enablePan={false}
+			/>
 			<group ref={car}>
-				{/* <fog attach="fog" args={[0x000000, 1, 9]} /> */}
 				{/* <gridHelper /> */}
 				<Ground />
 				<Cybertruck />
