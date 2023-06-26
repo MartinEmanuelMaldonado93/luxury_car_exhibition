@@ -3,8 +3,8 @@ import Image from 'next/image'
 
 export default function Home() {
   return (
-		<main className="flex min-h-screen flex-col  justify-between">
+		<div className="flex min-h-screen flex-col  justify-between">
 			<CanvasScene />
-		</main>
+		</div>
 	);
 }

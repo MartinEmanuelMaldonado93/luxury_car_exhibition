@@ -1,14 +1,13 @@
 "use client";
 import { Canvas } from "@react-three/fiber";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import Effects from "./Effects.post_processing";
 import { ShowCase } from "./ShowCase";
 import { Loader, Stats } from "@react-three/drei";
+import { Boxes } from "./components/Boxes";
 
 export default function CanvasScene() {
 	return (
-		// a wrapper is needed bc canvas takes the size of the parent
-		<div  >
+		<>
 			<Canvas
 				style={{ height: "100vh" }}
 				shadows
@@ -16,10 +15,11 @@ export default function CanvasScene() {
 			>
 				<color attach="background" args={["#15151a"]} />
 				<ShowCase />
+				{/* <Boxes /> */}
 				<Effects />
 				<Stats />
 			</Canvas>
 			<Loader />
-		</div>
+		</>
 	);
 }
