@@ -11,6 +11,7 @@ import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
 import { useLayoutEffect, useRef } from "react";
 import * as THREE from "three";
+import { Cybertruck } from "./CyberTruck.model";
 
 const shiningWhite = new THREE.Color(1.1, 1.1, 1.1);
 const shiningRed = new THREE.Color(4.8, 0.1, 0.1);
@@ -82,7 +83,9 @@ export function ShowCase() {
 	return (
 		<>
 			<OrbitControls minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
-			<group ref={car}>{/* <Cybertruck /> */}</group>
+			<group ref={car}>
+				<Cybertruck />
+			</group>
 			<group scale={[3, 0.4, 3]} position={[0, -0.2, 0]} ref={podium}>
 				<mesh receiveShadow>
 					<cylinderBufferGeometry />

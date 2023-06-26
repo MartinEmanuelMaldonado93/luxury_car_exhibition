@@ -26,3 +26,23 @@ export type GLTFCyberTruck = GLTF & {
 		rims: THREE.MeshStandardMaterial;
 	};
 };
+
+export type CustomUniforms = {
+	uniforms: {
+		uAlpha: {
+			value: number;
+		};
+		uMultiplier: {
+			value: number;
+		};
+		uColorA: {
+			value: THREE.Color;
+		};
+		uColorB: {
+			value: THREE.Color;
+		};
+		uTime: {
+			value: number;
+		};
+	};
+};
