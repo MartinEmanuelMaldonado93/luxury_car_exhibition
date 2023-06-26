@@ -1,9 +1,11 @@
+"use client";
 import {
 	ContactShadows,
 	Environment,
 	Lightformer,
 	OrbitControls,
 } from "@react-three/drei";
+// import { Cybertruck } from "./Cybertruck";
 
 import { useFrame } from "@react-three/fiber";
 import gsap from "gsap";
@@ -19,15 +21,64 @@ export function ShowCase() {
 	const square = useRef<THREE.Mesh>(null);
 	const triangle = useRef<THREE.Mesh>(null);
 
-	const tl = useRef();
+	const timeLine = useRef<gsap.core.Timeline>(gsap.timeline());
 
 	useFrame((_state, delta) => {
-		// podium.current.rotation.y += delta / 2;
-		// square.current.rotation.z += delta / 42;
-		// triangle.current.rotation.z += delta / 64;
+		if (!podium.current || !square.current || !triangle.current) return;
+
+		podium.current.rotation.y += delta / 2;
+		square.current.rotation.z += delta / 42;
+		triangle.current.rotation.z += delta / 64;
 	});
 
-	
+	useLayoutEffect(() => {
+		if (!podium.current || !car.current) return;
+		// y axis
+		timeLine.current.to(car.current.position, {
+			duration: 2,
+			y: -1.18,
+		});
+		timeLine.current.to(
+			podium.current.position,
+			{
+				duration: 2,
+				y: -1.35,
+			},
+			0
+		);
+
+		timeLine.current.to(
+			car.current.rotation,
+			{
+				duration: 2,
+				y: Math.PI * 2 - Math.PI / 6,
+			},
+			0
+		);
+
+		timeLine.current.to(podium.current.rotation, {
+			duration: 1,
+			y: Math.PI * 12,
+		});
+		timeLine.current.to(
+			podium.current.position,
+			{
+				duration: 0.5,
+				z: -8,
+			},
+			1.5
+		);
+
+		timeLine.current.to(
+			podium.current.rotation,
+			{
+				duration: 1,
+				x: Math.PI / 4,
+			},
+			1.8
+		);
+	}, []);
+
 	return (
 		<>
 			<OrbitControls minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
